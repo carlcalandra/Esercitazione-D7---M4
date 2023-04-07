@@ -4,6 +4,7 @@ const titleEl = document.getElementById("title");
 const setProduct = (product) => {
     console.log(product)
     const imageEl = document.createElement("img");
+    imageEl.style.maxHeight = "100%"
     imageEl.className = "img-fluid";
     imageEl.src = product.imageUrl;
     imageDiv.innerHTML = "";
@@ -26,6 +27,5 @@ window.onload =  () => {
         .then(product => {
             titleEl.innerText = product.name;
             setProduct(product);
-
         })
 }
