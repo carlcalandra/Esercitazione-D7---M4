@@ -7,6 +7,7 @@ const editModalObj = new bootstrap.Modal(editModal);
 const deleteModal = document.getElementById("deleteModal");
 const deleteModalObj = new bootstrap.Modal(deleteModal);
 const modalForm = editModal.querySelector("form");
+const body = document.querySelector("body");
 const keys = {
     name: "string",
     description: "string",
@@ -106,7 +107,6 @@ const createAlert = (text) => {
 const validateForm = () => {
     let errors = [];
     Object.keys(keys).forEach(key => {
-        console.log(key, !modalForm.elements[key].value)
         if(keys[key] === "string" && modalForm.elements[key].value.length === 0) {
             errors.push(`${key.replace(key[0], key[0].toUpperCase())} field is required`);
         } else if (keys[key] === "number" && (parseFloat(modalForm.elements[key].value) <= 0 || !modalForm.elements[key].value)) {
@@ -135,7 +135,6 @@ const handleDelete = async (product) => {
         let response = await fetchApi(baseUrl + product._id, "DELETE", {
             "Authorization": `Bearer ${token}`
         });
-        console.log(response);
         const index = products.indexOf(product);
         products.splice(index, 1);
         deleteProduct = null;
@@ -210,7 +209,7 @@ const addTableSection = () => {
 window.onload = () => {
     tableDiv.innerHTML = "";
     loadingSpinner = createSpinner();
-    tableDiv.appendChild(loadingSpinner)
+    body.appendChild(loadingSpinner)
     login()
         .then(response => fetchApi(baseUrl, "GET", {
             "Content-Type": "application/json",
@@ -218,7 +217,6 @@ window.onload = () => {
         }))
         .then(response => {
             products = response;
-            console.log(products);
             loadingSpinner.remove();
             addTableSection();
             newProductDiv.classList.remove("d-none");
