@@ -46,16 +46,16 @@ const createProductRow = (product) => {
     tdImg.innerHTML = `<img src="${product.imageUrl}" alt="Product image">`
     tdPrice.innerText = product.price;
     const editButton = document.createElement("button");
-    editButton.className = "mx-2";
-    editButton.innerHTML = `<i class="bi bi-pencil"></i>`
+    editButton.className = "btn-trasparent mx-2";
+    editButton.innerHTML = `<i class="bi bi-pencil"></i>`;
     editButton.addEventListener("click", () => {
         editProduct = product;
         handleClickModal()
-    })
+    });
     editButton.setAttribute("data-bs-toggle", "modal");
     editButton.setAttribute("data-bs-target", "#addEditModal");
     const deleteButton = document.createElement("button");
-    deleteButton.className = "mx-2"
+    deleteButton.className = "btn-trasparent mx-2"
     deleteButton.innerHTML = `<i class="bi bi-trash3"></i>`
     deleteButton.setAttribute("data-bs-toggle", "modal");
     deleteButton.setAttribute("data-bs-target", "#deleteModal");
@@ -69,7 +69,8 @@ const createProductRow = (product) => {
 }
 
 const createAlert = (text) => {
-    let startPoint = 20;
+    const fixedDistance = 20;
+    let startPoint = fixedDistance;
     const alerts = document.getElementsByClassName("alert");
     if (alerts.length > 0){
         startPoint += alerts[alerts.length -1].offsetHeight + alerts[alerts.length -1].offsetTop;
@@ -82,6 +83,23 @@ const createAlert = (text) => {
     alertDiv.className = "alert alert-danger alert-dismissible fade show";
     alertDiv.role = "alert";
     alertDiv.innerHTML =`${text} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
+    const bsAlert =  new bootstrap.Alert(alertDiv);
+    let timeOutActive = true;
+    const timeOut = setTimeout(() => {
+        bsAlert.close();
+        timeOutActive = false;
+    }, 5000);
+    alertDiv.addEventListener("close.bs.alert", (event)=> {
+        if (timeOutActive) {
+            clearTimeout(timeOut);
+        }
+        const alerts = document.getElementsByClassName("alert");
+        for (let alert of alerts) {
+            if (alert.offsetTop > event.target.offsetTop) {
+                alert.style.top = `${alert.offsetTop - event.target.offsetHeight - fixedDistance}px`;
+            }
+        }
+    })
     return alertDiv;
 }
 
