@@ -77,10 +77,10 @@ const createAlert = (text) => {
         startPoint += alerts[alerts.length -1].offsetHeight + alerts[alerts.length -1].offsetTop;
     }
     const alertDiv = document.createElement("div");
-    alertDiv.style.width = "20%"
+    alertDiv.style.width = "18%"
     alertDiv.style.position = "absolute"
     alertDiv.style.top = `${startPoint}px`
-    alertDiv.style.left = "75%"
+    alertDiv.style.left = "77%"
     alertDiv.className = "alert alert-danger alert-dismissible fade show";
     alertDiv.role = "alert";
     alertDiv.innerHTML =`${text} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`

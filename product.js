@@ -4,17 +4,16 @@ const titleEl = document.getElementById("title");
 const setProduct = (product) => {
     console.log(product)
     const imageEl = document.createElement("img");
-    imageEl.style.maxHeight = "100%"
-    imageEl.className = "img-fluid";
+    imageEl.className = "img-hero";
     imageEl.src = product.imageUrl;
     imageDiv.innerHTML = "";
     imageDiv.appendChild(imageEl);
-    productSpecificationsDiv.innerHTML = `  <p>Description: ${product.description}</p>
-                                            <p>Brand: ${product.brand}</p>
-                                           <p>Price: ${product.price}</p>
-                                           <p>Created at: ${product.createdAt}</p>
-                                           <p>Updated at: ${product.updatedAt}</p>
-                                           <p>User id: ${product.userId}</p>`                           
+    productSpecificationsDiv.innerHTML = `  <p class="text-truncate">Description: ${product.description}</p>
+                                            <p class="text-truncate">Brand: ${product.brand}</p>
+                                           <p class="text-truncate">Price: ${product.price}€</p>
+                                           <p class="text-truncate">Created at: ${product.createdAt}</p>
+                                           <p class="text-truncate">Updated at: ${product.updatedAt}</p>
+                                           <p class="text-truncate">User id: ${product.userId}</p>`                           
 }
 window.onload =  () => {
     const params = new URLSearchParams(window.location.search);

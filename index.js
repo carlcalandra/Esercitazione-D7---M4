@@ -21,8 +21,9 @@ const createCard = (product) => {
     h6.className = "card-title text-truncate"
     h6.innerText = product.name;
     const p = document.createElement("p");
-    p.innerHTML =  `<span>Description: ${product.description}</span><br>
-    <span>Price: ${product.price}€</span>`
+    p.innerHTML =  `<div class="text-truncate">Description: ${product.description}</div>
+    <div class="text-truncate">Brand: ${product.brand}</div>
+    <div class="text-truncate">Price: ${product.price}€</div>`
     cardBody.append(h6, p);
     cardDiv.append(aProduct, cardBody);
     colDiv.appendChild(cardDiv);
