@@ -91,6 +91,7 @@ const createAlert = (text) => {
         timeOutActive = false;
     }, 5000);
     alertDiv.addEventListener("close.bs.alert", (event)=> {
+        event.target.style.opacity = 0;
         if (timeOutActive) {
             clearTimeout(timeOut);
         }

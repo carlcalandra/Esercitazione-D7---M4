@@ -44,5 +44,5 @@ td img {
 }
 
 .alert {
-    transition: top .1s ease-in;
+    transition: top .2s ease-in, opacity .2s ease-in;
 }
